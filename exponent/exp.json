@@ -1,0 +1,21 @@
+{
+  "name": "Safe Hippo",
+  "description": "Find the safest way home",
+  "slug": "safe-hippo",
+  "sdkVersion": "10.0.0",
+  "version": "1.5.0",
+  "orientation": "portrait",
+  "primaryColor": "#27a1ab",
+  "iconUrl": "https://cloud.githubusercontent.com/assets/7908723/19989247/7856b438-a1e2-11e6-9615-6b0c038bc000.png",
+  "notification": {
+    "iconUrl": "https://cloud.githubusercontent.com/assets/7908723/19989241/67bd178e-a1e2-11e6-8c48-0fb730dc7037.png",
+    "color": "#27a1ab"
+  },
+  "loading": {
+    "iconUrl": "https://cloud.githubusercontent.com/assets/7908723/19990493/5ca1c92c-a1eb-11e6-9a1a-a8c4c00f83ce.png",
+    "hideExponentText": true
+  },
+  "packagerOpts": {
+    "assetExts": ["ttf", "mp4"]
+  }
+}

@@ -1,10 +1,17 @@
 # Node
 node_modules/
 env.js
-
 # MobileFiles
 client/mobile/__tests__/
 client/mobile/android/
 client/mobile/ios/
 client/mobile/node_modules/
 
+# macOS
+.DS_Store
+client/exponent/react-native-maps
+/nativeClient
+.DS_Store
+react-native-maps
+\node_modules\
+node_modules
