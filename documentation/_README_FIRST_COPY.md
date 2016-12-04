@@ -28,7 +28,6 @@
 - Redis 2.6.x
 - MongoDB 9.1.x
 
-
 ## Development
 
 ### Installing Dependencies
