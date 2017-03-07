@@ -8,6 +8,8 @@ angular.module('app.controllers', [])
   $scope.safeRoute;
   $scope.originCoords = {};
   $scope.destinationCoords = {};
+  $scope.originVicinity = '';
+  $scope.destinationVicinity = '';
 
   $scope.renderRoute = (points) => {
     const safeRoute = new google.maps.Polyline({
@@ -29,14 +31,30 @@ angular.module('app.controllers', [])
     $scope.showOriginField = !$scope.showOriginField;
   };
 
+  $scope.validLocation = (locationType) => {
+    if (locationType === 'origin') {
+      return $scope.originVicinity === 'San Francisco';
+    } else {
+      return $scope.destinationVicinity === 'San Francisco' || $scope.destinationVicinity === '';
+    }
+  };
+
   $scope.setPos = (currentPosition) => {
     const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${currentPosition.lat},${currentPosition.lng}&key=AIzaSyBgXiNUqN5OlBHE7hAVxV9phqHQrfKldXw`;
-    
+
     fetch(url)
     .then(addressData => addressData.json())
     .then((addressDataJSON) => {
       const longAddress = addressDataJSON.results[0].formatted_address;
       const arrSplit = longAddress.split(',');
+  
+      //Determine the auto generated start location
+      addressDataJSON.results[0].address_components.forEach((addressData) => {
+        if (addressData.types[0] === 'locality' || addressData.types[1] === 'locality') {
+          $scope.pos = addressData.long_name;
+          console.log('locality is!', addressData.long_name);
+        }
+      });
 
       shortAddress = `${arrSplit[0]},${arrSplit[1]}`;
       currentPosition.address = shortAddress;
@@ -63,6 +81,12 @@ angular.module('app.controllers', [])
       locationURL += (`&mobile=${mobile}`);
     }
 
+    const midLat = ($scope.originCoords.lat + $scope.destinationCoords.lat) / 2;
+    const midLng = ($scope.originCoords.lng + $scope.destinationCoords.lng) / 2;
+    const newCenter = { lat: midLat, lng: midLng };
+    map.setCenter(newCenter);
+    
+
     fetch(locationURL)
     .then(route => route.json())
     .then((jsonRoute) => {
@@ -75,4 +99,3 @@ angular.module('app.controllers', [])
     });
   };
 });
-
